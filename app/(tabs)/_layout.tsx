@@ -1,55 +1,25 @@
+import GridComponent from "@/components/GridComponent";
+import HomeComponent from "@/components/HomeComponent";
+import NewComponent from "@/components/NewComponent";
+import TrendingComponent from "@/components/TrendingComponent";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-
-// 1. Alag Components (Har tab ka apna component)
-function GridComponent() {
-  return (
-    <View style={styles.componentBox}>
-      <Text style={styles.titleText}>Categories Screen Active</Text>
-    </View>
-  );
-}
-
-function HomeComponent() {
-  return (
-    <View style={styles.componentBox}>
-      <Text style={styles.titleText}>Home Screen Active</Text>
-    </View>
-  );
-}
-
-function NewComponent() {
-  return (
-    <View style={styles.componentBox}>
-      <Text style={styles.titleText}>New Items Screen Active</Text>
-    </View>
-  );
-}
-
-function TrendingComponent() {
-  return (
-    <View style={styles.componentBox}>
-      <Text style={styles.titleText}>Trending Screen Active</Text>
-    </View>
-  );
-}
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeContainer() {
   const [activeTab, setActiveTab] = useState("home");
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       {/* Top Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Islamic Wallpaper</Text>
+        <Text style={styles.headerTitle}>Wallpaper</Text>
         <View style={styles.headerIcons}>
           <TouchableOpacity>
             <Ionicons name="settings-outline" size={20} color="#fff" />
@@ -149,13 +119,10 @@ export default function HomeContainer() {
         </TouchableOpacity>
       </View>
 
-      {/* Dynamic Component Rendering based on Active Tab */}
-      <ScrollView contentContainerStyle={styles.contentArea}>
-        {activeTab === "grid" && <GridComponent />}
-        {activeTab === "home" && <HomeComponent />}
-        {activeTab === "new" && <NewComponent />}
-        {activeTab === "trending" && <TrendingComponent />}
-      </ScrollView>
+      {activeTab === "grid" && <GridComponent />}
+      {activeTab === "home" && <HomeComponent />}
+      {activeTab === "new" && <NewComponent />}
+      {activeTab === "trending" && <TrendingComponent />}
     </SafeAreaView>
   );
 }
@@ -213,19 +180,9 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   contentArea: {
-    padding: 16,
+    flex: 1,
   },
-  componentBox: {
-    backgroundColor: "#1e1e1e",
-    padding: 24,
-    borderRadius: 12,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#333",
-  },
-  titleText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
+  contentContainer: {
+    flexGrow: 1,
   },
 });
