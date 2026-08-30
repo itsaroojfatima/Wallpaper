@@ -2,68 +2,96 @@ import GridComponent from "@/components/GridComponent";
 import HomeComponent from "@/components/HomeComponent";
 import NewComponent from "@/components/NewComponent";
 import TrendingComponent from "@/components/TrendingComponent";
+
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
+
 import {
+  Alert,
+  Platform,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeContainer() {
   const [activeTab, setActiveTab] = useState("home");
+  const router = useRouter();
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
+    <View style={styles.container}>
       <StatusBar style="light" />
 
-      {/* Top Header */}
+      {/* HEADER */}
       <View style={styles.header}>
+        {/* TITLE */}
         <View style={styles.titleContainer}>
           <Text style={styles.brandTitle}>
             Wallpaper<Text style={styles.brandDot}>.</Text>
           </Text>
+
           <Text style={styles.brandSubtitle}>Explore 4K & Ultra HD</Text>
         </View>
 
+        {/* ICONS */}
         <View style={styles.headerActions}>
-          <TouchableOpacity style={styles.headerBtn} activeOpacity={0.75}>
-            <Ionicons name="search-outline" size={18} color="#ffffff" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerBtn} activeOpacity={0.75}>
-            <Ionicons name="heart-outline" size={18} color="#ffffff" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerBtn} activeOpacity={0.75}>
-            <Ionicons name="options-outline" size={18} color="#ffffff" />
-          </TouchableOpacity>
+          {/* SETTINGS */}
+          <Pressable
+            style={styles.iconBtn}
+            onPress={() => {
+              Alert.alert("Settings", "Settings button clicked!");
+              router.push("/");
+            }}
+          >
+            <Ionicons name="settings-outline" size={22} color="#ffffff" />
+          </Pressable>
+
+          {/* GRID */}
+          <Pressable
+            style={styles.iconBtn}
+            onPress={() => setActiveTab("grid")}
+          >
+            <Ionicons name="grid-outline" size={22} color="#ffffff" />
+          </Pressable>
+
+          {/* FAVORITE */}
+          <Pressable
+            style={styles.iconBtn}
+            onPress={() => {
+              Alert.alert("Favorite", "Favorite button clicked!");
+              router.push("/");
+            }}
+          >
+            <Ionicons name="heart-outline" size={23} color="#ffffff" />
+          </Pressable>
         </View>
       </View>
 
-      {/* Horizontal Luxury Tab Rail */}
+      {/* TABS */}
       <View style={styles.tabsWrapper}>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.tabsScrollContent}
         >
-          {/* Categories Tab */}
-          <TouchableOpacity
+          {/* CATEGORIES */}
+          <Pressable
             style={[
               styles.tabPill,
               activeTab === "grid" && styles.activeTabPill,
             ]}
             onPress={() => setActiveTab("grid")}
-            activeOpacity={0.8}
           >
             <Ionicons
               name={activeTab === "grid" ? "grid" : "grid-outline"}
-              size={17}
+              size={16}
               color={activeTab === "grid" ? "#ffffff" : "#9ca3af"}
             />
+
             <Text
               style={[
                 styles.tabPillText,
@@ -72,22 +100,22 @@ export default function HomeContainer() {
             >
               Categories
             </Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          {/* Home Tab */}
-          <TouchableOpacity
+          {/* HOME */}
+          <Pressable
             style={[
               styles.tabPill,
               activeTab === "home" && styles.activeTabPill,
             ]}
             onPress={() => setActiveTab("home")}
-            activeOpacity={0.8}
           >
             <Ionicons
               name={activeTab === "home" ? "home" : "home-outline"}
-              size={17}
+              size={16}
               color={activeTab === "home" ? "#ffffff" : "#9ca3af"}
             />
+
             <Text
               style={[
                 styles.tabPillText,
@@ -96,22 +124,22 @@ export default function HomeContainer() {
             >
               Home
             </Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          {/* New Tab */}
-          <TouchableOpacity
+          {/* NEW */}
+          <Pressable
             style={[
               styles.tabPill,
               activeTab === "new" && styles.activeTabPill,
             ]}
             onPress={() => setActiveTab("new")}
-            activeOpacity={0.8}
           >
             <Ionicons
               name={activeTab === "new" ? "sparkles" : "sparkles-outline"}
-              size={17}
+              size={16}
               color={activeTab === "new" ? "#ffffff" : "#9ca3af"}
             />
+
             <Text
               style={[
                 styles.tabPillText,
@@ -120,22 +148,22 @@ export default function HomeContainer() {
             >
               New
             </Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          {/* Trending Tab */}
-          <TouchableOpacity
+          {/* TRENDING */}
+          <Pressable
             style={[
               styles.tabPill,
               activeTab === "trending" && styles.activeTabPill,
             ]}
             onPress={() => setActiveTab("trending")}
-            activeOpacity={0.8}
           >
             <Ionicons
               name={activeTab === "trending" ? "flame" : "flame-outline"}
-              size={17}
+              size={16}
               color={activeTab === "trending" ? "#ffffff" : "#9ca3af"}
             />
+
             <Text
               style={[
                 styles.tabPillText,
@@ -144,103 +172,135 @@ export default function HomeContainer() {
             >
               Trending
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </ScrollView>
       </View>
 
-      {/* Screen Body Components */}
-      {activeTab === "grid" && <GridComponent />}
-      {activeTab === "home" && <HomeComponent />}
-      {activeTab === "new" && <NewComponent />}
-      {activeTab === "trending" && <TrendingComponent />}
-    </SafeAreaView>
+      {/* SCREEN CONTENT */}
+      <View style={styles.content}>
+        {activeTab === "grid" && <GridComponent />}
+        {activeTab === "home" && <HomeComponent />}
+        {activeTab === "new" && <NewComponent />}
+        {activeTab === "trending" && <TrendingComponent />}
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0d0e12",
+    backgroundColor: "#0a0a12",
   },
+
+  /* HEADER */
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 14,
-    backgroundColor: "#0d0e12",
+
+    paddingHorizontal: 16,
+
+    /*
+      YE HEADER KO ACTUALLY NEECHE LE JAYEGA
+    */
+    paddingTop: Platform.OS === "android" ? 75 : 85,
+
+    paddingBottom: 15,
+
+    backgroundColor: "#0a0a12",
+
+    zIndex: 100,
+    elevation: 100,
   },
+
   titleContainer: {
-    gap: 2,
+    flex: 1,
   },
+
   brandTitle: {
     color: "#ffffff",
-    fontSize: 26,
-    fontWeight: "900",
-    letterSpacing: 0.5,
+    fontSize: 22,
+    fontWeight: "bold",
   },
+
   brandDot: {
-    color: "#b8867a",
+    color: "#d19283",
   },
+
   brandSubtitle: {
     color: "#9ca3af",
-    fontSize: 12,
-    fontWeight: "500",
-    letterSpacing: 0.3,
+    fontSize: 11,
+    marginTop: 2,
   },
+
+  /* ICONS */
   headerActions: {
     flexDirection: "row",
-    gap: 10,
     alignItems: "center",
+    gap: 8,
+
+    zIndex: 200,
+    elevation: 200,
   },
-  headerBtn: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
-    backgroundColor: "#171720",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.08)",
+
+  iconBtn: {
+    width: 42,
+    height: 42,
+
     justifyContent: "center",
     alignItems: "center",
+
+    borderRadius: 21,
+
+    backgroundColor: "#181822",
+
+    zIndex: 300,
+    elevation: 300,
   },
+
+  /* TABS */
   tabsWrapper: {
+    backgroundColor: "#0a0a12",
     paddingBottom: 12,
-    backgroundColor: "#0d0e12",
+
+    zIndex: 100,
   },
+
   tabsScrollContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     gap: 10,
-    alignItems: "center",
   },
+
   tabPill: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#171720",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 24,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.08)",
-    gap: 9, // Ample space between icon and text
+
+    backgroundColor: "#181822",
+
+    paddingVertical: 9,
+    paddingHorizontal: 15,
+
+    borderRadius: 20,
+    gap: 7,
   },
+
   activeTabPill: {
-    backgroundColor: "#b8867a",
-    borderColor: "#b8867a",
-    shadowColor: "#b8867a",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.45,
-    shadowRadius: 10,
-    elevation: 5,
+    backgroundColor: "#d19283",
   },
+
   tabPillText: {
     color: "#9ca3af",
-    fontSize: 13.5,
+    fontSize: 13,
     fontWeight: "600",
-    letterSpacing: 0.3,
   },
+
   activeTabPillText: {
     color: "#ffffff",
-    fontWeight: "700",
+  },
+
+  /* CONTENT */
+  content: {
+    flex: 1,
   },
 });
