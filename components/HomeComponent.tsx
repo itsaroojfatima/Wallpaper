@@ -114,7 +114,7 @@ export default function HomeContainer() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Single Main Header with Settings Icon */}
+      {/* Single Main Header with Settings Icon
       <View style={styles.header}>
         <View>
           <Text style={styles.headerTitle}>
@@ -133,7 +133,7 @@ export default function HomeContainer() {
             <Ionicons name="heart-outline" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
 
       {/* Single Top Navigation Bar */}
       <View style={styles.topTabBar}>
