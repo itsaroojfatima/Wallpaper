@@ -3,19 +3,14 @@ import HomeComponent from "@/components/HomeComponent";
 import NewComponent from "@/components/NewComponent";
 import TrendingComponent from "@/components/TrendingComponent";
 
-import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 
 import {
-  Alert,
   Platform,
-  Pressable,
-  ScrollView,
   StyleSheet,
-  Text,
-  View,
+  View
 } from "react-native";
 
 export default function HomeContainer() {
@@ -27,8 +22,7 @@ export default function HomeContainer() {
       <StatusBar style="light" />
 
       {/* HEADER */}
-      <View style={styles.header}>
-        {/* TITLE */}
+      {/* <View style={styles.header}>
         <View style={styles.titleContainer}>
           <Text style={styles.brandTitle}>
             Wallpaper<Text style={styles.brandDot}>.</Text>
@@ -37,9 +31,7 @@ export default function HomeContainer() {
           <Text style={styles.brandSubtitle}>Explore 4K & Ultra HD</Text>
         </View>
 
-        {/* ICONS */}
         <View style={styles.headerActions}>
-          {/* SETTINGS */}
           <Pressable
             style={styles.iconBtn}
             onPress={() => {
@@ -50,7 +42,6 @@ export default function HomeContainer() {
             <Ionicons name="settings-outline" size={22} color="#ffffff" />
           </Pressable>
 
-          {/* GRID */}
           <Pressable
             style={styles.iconBtn}
             onPress={() => setActiveTab("grid")}
@@ -58,7 +49,6 @@ export default function HomeContainer() {
             <Ionicons name="grid-outline" size={22} color="#ffffff" />
           </Pressable>
 
-          {/* FAVORITE */}
           <Pressable
             style={styles.iconBtn}
             onPress={() => {
@@ -69,112 +59,7 @@ export default function HomeContainer() {
             <Ionicons name="heart-outline" size={23} color="#ffffff" />
           </Pressable>
         </View>
-      </View>
-
-      {/* TABS */}
-      <View style={styles.tabsWrapper}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.tabsScrollContent}
-        >
-          {/* CATEGORIES */}
-          <Pressable
-            style={[
-              styles.tabPill,
-              activeTab === "grid" && styles.activeTabPill,
-            ]}
-            onPress={() => setActiveTab("grid")}
-          >
-            <Ionicons
-              name={activeTab === "grid" ? "grid" : "grid-outline"}
-              size={16}
-              color={activeTab === "grid" ? "#ffffff" : "#9ca3af"}
-            />
-
-            <Text
-              style={[
-                styles.tabPillText,
-                activeTab === "grid" && styles.activeTabPillText,
-              ]}
-            >
-              Categories
-            </Text>
-          </Pressable>
-
-          {/* HOME */}
-          <Pressable
-            style={[
-              styles.tabPill,
-              activeTab === "home" && styles.activeTabPill,
-            ]}
-            onPress={() => setActiveTab("home")}
-          >
-            <Ionicons
-              name={activeTab === "home" ? "home" : "home-outline"}
-              size={16}
-              color={activeTab === "home" ? "#ffffff" : "#9ca3af"}
-            />
-
-            <Text
-              style={[
-                styles.tabPillText,
-                activeTab === "home" && styles.activeTabPillText,
-              ]}
-            >
-              Home
-            </Text>
-          </Pressable>
-
-          {/* NEW */}
-          <Pressable
-            style={[
-              styles.tabPill,
-              activeTab === "new" && styles.activeTabPill,
-            ]}
-            onPress={() => setActiveTab("new")}
-          >
-            <Ionicons
-              name={activeTab === "new" ? "sparkles" : "sparkles-outline"}
-              size={16}
-              color={activeTab === "new" ? "#ffffff" : "#9ca3af"}
-            />
-
-            <Text
-              style={[
-                styles.tabPillText,
-                activeTab === "new" && styles.activeTabPillText,
-              ]}
-            >
-              New
-            </Text>
-          </Pressable>
-
-          {/* TRENDING */}
-          <Pressable
-            style={[
-              styles.tabPill,
-              activeTab === "trending" && styles.activeTabPill,
-            ]}
-            onPress={() => setActiveTab("trending")}
-          >
-            <Ionicons
-              name={activeTab === "trending" ? "flame" : "flame-outline"}
-              size={16}
-              color={activeTab === "trending" ? "#ffffff" : "#9ca3af"}
-            />
-
-            <Text
-              style={[
-                styles.tabPillText,
-                activeTab === "trending" && styles.activeTabPillText,
-              ]}
-            >
-              Trending
-            </Text>
-          </Pressable>
-        </ScrollView>
-      </View>
+      </View> */}
 
       {/* SCREEN CONTENT */}
       <View style={styles.content}>
