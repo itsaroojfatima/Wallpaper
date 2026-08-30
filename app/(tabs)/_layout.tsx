@@ -26,9 +26,7 @@ export default function HomeContainer() {
     <View style={styles.container}>
       <StatusBar style="light" />
 
-      {/* HEADER */}
       <View style={styles.header}>
-        {/* TITLE */}
         <View style={styles.titleContainer}>
           <Text style={styles.brandTitle}>
             Wallpaper<Text style={styles.brandDot}>.</Text>
@@ -37,9 +35,7 @@ export default function HomeContainer() {
           <Text style={styles.brandSubtitle}>Explore 4K & Ultra HD</Text>
         </View>
 
-        {/* ICONS */}
         <View style={styles.headerActions}>
-          {/* SETTINGS */}
           <Pressable
             style={styles.iconBtn}
             onPress={() => {
@@ -50,7 +46,6 @@ export default function HomeContainer() {
             <Ionicons name="settings-outline" size={22} color="#ffffff" />
           </Pressable>
 
-          {/* GRID */}
           <Pressable
             style={styles.iconBtn}
             onPress={() => setActiveTab("grid")}
@@ -58,7 +53,6 @@ export default function HomeContainer() {
             <Ionicons name="grid-outline" size={22} color="#ffffff" />
           </Pressable>
 
-          {/* FAVORITE */}
           <Pressable
             style={styles.iconBtn}
             onPress={() => {
@@ -71,14 +65,12 @@ export default function HomeContainer() {
         </View>
       </View>
 
-      {/* TABS */}
       <View style={styles.tabsWrapper}>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.tabsScrollContent}
         >
-          {/* CATEGORIES */}
           <Pressable
             style={[
               styles.tabPill,
@@ -102,7 +94,6 @@ export default function HomeContainer() {
             </Text>
           </Pressable>
 
-          {/* HOME */}
           <Pressable
             style={[
               styles.tabPill,
@@ -126,7 +117,6 @@ export default function HomeContainer() {
             </Text>
           </Pressable>
 
-          {/* NEW */}
           <Pressable
             style={[
               styles.tabPill,
@@ -150,7 +140,6 @@ export default function HomeContainer() {
             </Text>
           </Pressable>
 
-          {/* TRENDING */}
           <Pressable
             style={[
               styles.tabPill,
@@ -176,7 +165,6 @@ export default function HomeContainer() {
         </ScrollView>
       </View>
 
-      {/* SCREEN CONTENT */}
       <View style={styles.content}>
         {activeTab === "grid" && <GridComponent />}
         {activeTab === "home" && <HomeComponent />}
@@ -192,114 +180,79 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#0a0a12",
   },
-
-  /* HEADER */
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-
     paddingHorizontal: 16,
-
-    /*
-      YE HEADER KO ACTUALLY NEECHE LE JAYEGA
-    */
     paddingTop: Platform.OS === "android" ? 75 : 85,
-
     paddingBottom: 15,
-
     backgroundColor: "#0a0a12",
-
     zIndex: 100,
     elevation: 100,
   },
-
   titleContainer: {
     flex: 1,
   },
-
   brandTitle: {
     color: "#ffffff",
     fontSize: 22,
     fontWeight: "bold",
   },
-
   brandDot: {
     color: "#d19283",
   },
-
   brandSubtitle: {
     color: "#9ca3af",
     fontSize: 11,
     marginTop: 2,
   },
-
-  /* ICONS */
   headerActions: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-
     zIndex: 200,
     elevation: 200,
   },
-
   iconBtn: {
     width: 42,
     height: 42,
-
     justifyContent: "center",
     alignItems: "center",
-
     borderRadius: 21,
-
     backgroundColor: "#181822",
-
     zIndex: 300,
     elevation: 300,
   },
-
-  /* TABS */
   tabsWrapper: {
     backgroundColor: "#0a0a12",
     paddingBottom: 12,
-
     zIndex: 100,
   },
-
   tabsScrollContent: {
     paddingHorizontal: 16,
     gap: 10,
   },
-
   tabPill: {
     flexDirection: "row",
     alignItems: "center",
-
     backgroundColor: "#181822",
-
     paddingVertical: 9,
     paddingHorizontal: 15,
-
     borderRadius: 20,
     gap: 7,
   },
-
   activeTabPill: {
     backgroundColor: "#d19283",
   },
-
   tabPillText: {
     color: "#9ca3af",
     fontSize: 13,
     fontWeight: "600",
   },
-
   activeTabPillText: {
     color: "#ffffff",
   },
-
-  /* CONTENT */
   content: {
     flex: 1,
   },

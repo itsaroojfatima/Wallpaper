@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     flex: 1,
-    backgroundColor: "#7C2D12", // Distinct Amber / Rust Orange
+    backgroundColor: "#7C2D12", 
     padding: 24,
     alignItems: "center",
     justifyContent: "center",

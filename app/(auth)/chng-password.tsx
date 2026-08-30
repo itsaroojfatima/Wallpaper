@@ -38,11 +38,9 @@ export default function ChangePasswordScreen() {
     <SafeAreaView style={styles.container} edges={["top", "left", "right", "bottom"]}>
       <StatusBar style="light" />
 
-      {/* Ambient background glow */}
       <View style={styles.ambientGlowTop} />
       <View style={styles.ambientGlowBottom} />
 
-      {/* Top Bar */}
       <View style={styles.navBar}>
         <TouchableOpacity
           style={styles.backButton}
@@ -78,7 +76,6 @@ export default function ChangePasswordScreen() {
             </View>
 
             <View style={styles.inputContainer}>
-              {/* Old Password */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Current Password</Text>
                 <View
@@ -117,7 +114,6 @@ export default function ChangePasswordScreen() {
                 </View>
               </View>
 
-              {/* New Password */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>New Password</Text>
                 <View
@@ -156,7 +152,6 @@ export default function ChangePasswordScreen() {
                 </View>
               </View>
 
-              {/* Confirm Password */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Confirm New Password</Text>
                 <View

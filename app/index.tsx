@@ -9,7 +9,6 @@ const { width } = Dimensions.get("window");
 export default function SplashScreen() {
   const router = useRouter();
 
-  // Animation values
   const logoScale = useRef(new Animated.Value(0.8)).current;
   const logoOpacity = useRef(new Animated.Value(0)).current;
   const textOpacity = useRef(new Animated.Value(0)).current;
@@ -18,7 +17,6 @@ export default function SplashScreen() {
   const glowAnim = useRef(new Animated.Value(0.4)).current;
 
   useEffect(() => {
-    // 1. Entrance animation sequence
     Animated.parallel([
       Animated.spring(logoScale, {
         toValue: 1,
@@ -48,11 +46,10 @@ export default function SplashScreen() {
         toValue: 1,
         duration: 2600,
         easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-        useNativeDriver: false, // width animation
+        useNativeDriver: false,
       }),
     ]).start();
 
-    // 2. Continuous subtle glow pulse
     Animated.loop(
       Animated.sequence([
         Animated.timing(glowAnim, {
@@ -70,7 +67,6 @@ export default function SplashScreen() {
       ])
     ).start();
 
-    // 3. Navigation to Login
     const timer = setTimeout(() => {
       router.replace("/login");
     }, 3000);
@@ -87,12 +83,10 @@ export default function SplashScreen() {
     <View style={styles.container}>
       <StatusBar style="light" />
 
-      {/* Ambient background glow orbs */}
       <Animated.View style={[styles.ambientGlowTop, { opacity: glowAnim }]} />
       <View style={styles.ambientGlowBottom} />
 
       <View style={styles.centerContent}>
-        {/* Animated Brand Logo Icon */}
         <Animated.View
           style={[
             styles.logoWrapper,
@@ -111,7 +105,6 @@ export default function SplashScreen() {
           </View>
         </Animated.View>
 
-        {/* Animated Brand Text */}
         <Animated.View
           style={[
             styles.textContainer,
@@ -128,7 +121,6 @@ export default function SplashScreen() {
         </Animated.View>
       </View>
 
-      {/* Bottom Loading Progress & Footer */}
       <View style={styles.footerContainer}>
         <View style={styles.progressBarTrack}>
           <Animated.View

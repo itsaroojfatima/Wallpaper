@@ -37,7 +37,6 @@ export default function LoginScreen() {
     >
       <StatusBar style="light" />
 
-      {/* Ambient background glow effects */}
       <View style={styles.ambientGlowTop} />
       <View style={styles.ambientGlowBottom} />
 
@@ -51,7 +50,6 @@ export default function LoginScreen() {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.innerContainer}>
-            {/* Top Brand Monogram */}
             <View style={styles.brandHeader}>
               <View style={styles.logoBadge}>
                 <Text style={styles.logoText}>W</Text>
@@ -59,7 +57,6 @@ export default function LoginScreen() {
               <Text style={styles.brandName}>Wallpaper</Text>
             </View>
 
-            {/* Welcome Titles */}
             <View style={styles.titleSection}>
               <Text style={styles.welcomeText}>Welcome Back</Text>
               <Text style={styles.subtitleText}>
@@ -67,9 +64,7 @@ export default function LoginScreen() {
               </Text>
             </View>
 
-            {/* Input Fields */}
             <View style={styles.formContainer}>
-              {/* Email Input */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Email Address</Text>
                 <View
@@ -98,7 +93,6 @@ export default function LoginScreen() {
                 </View>
               </View>
 
-              {/* Password Input */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Password</Text>
                 <View
@@ -137,7 +131,6 @@ export default function LoginScreen() {
                 </View>
               </View>
 
-              {/* Forgot Password */}
               <TouchableOpacity
                 style={styles.forgotPasswordContainer}
                 onPress={() => router.push("/forget-password")}
@@ -146,7 +139,6 @@ export default function LoginScreen() {
                 <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
               </TouchableOpacity>
 
-              {/* Login Button */}
               <TouchableOpacity
                 style={styles.loginButton}
                 onPress={handleLogin}
@@ -157,7 +149,6 @@ export default function LoginScreen() {
               </TouchableOpacity>
             </View>
 
-            {/* Sign Up Link */}
             <View style={styles.footerContainer}>
               <Text style={styles.footerText}>Don't have an account? </Text>
               <TouchableOpacity

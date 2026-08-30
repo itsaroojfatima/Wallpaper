@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     flex: 1,
-    backgroundColor: "#701A75", // Distinct Magenta / Fuchsia
+    backgroundColor: "#701A75", 
     padding: 24,
     alignItems: "center",
     justifyContent: "center",

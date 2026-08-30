@@ -40,11 +40,9 @@ export default function SignUpScreen() {
     <SafeAreaView style={styles.container} edges={["top", "left", "right", "bottom"]}>
       <StatusBar style="light" />
 
-      {/* Ambient background glow effects */}
       <View style={styles.ambientGlowTop} />
       <View style={styles.ambientGlowBottom} />
 
-      {/* Top Navigation Bar */}
       <View style={styles.navBar}>
         <TouchableOpacity
           style={styles.backButton}
@@ -72,7 +70,6 @@ export default function SignUpScreen() {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.innerContainer}>
-            {/* Header Titles */}
             <View style={styles.titleSection}>
               <Text style={styles.title}>Create Account</Text>
               <Text style={styles.subtitle}>
@@ -80,9 +77,7 @@ export default function SignUpScreen() {
               </Text>
             </View>
 
-            {/* Inputs Container */}
             <View style={styles.inputContainer}>
-              {/* Full Name */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Full Name</Text>
                 <View
@@ -109,7 +104,6 @@ export default function SignUpScreen() {
                 </View>
               </View>
 
-              {/* Email Address */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Email Address</Text>
                 <View
@@ -138,7 +132,6 @@ export default function SignUpScreen() {
                 </View>
               </View>
 
-              {/* Phone Number */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Phone Number</Text>
                 <View
@@ -166,7 +159,6 @@ export default function SignUpScreen() {
                 </View>
               </View>
 
-              {/* Password */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Password</Text>
                 <View
@@ -205,7 +197,6 @@ export default function SignUpScreen() {
                 </View>
               </View>
 
-              {/* Confirm Password */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Confirm Password</Text>
                 <View
@@ -244,7 +235,6 @@ export default function SignUpScreen() {
                 </View>
               </View>
 
-              {/* Location / Address */}
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Location / Country</Text>
                 <View
@@ -272,7 +262,6 @@ export default function SignUpScreen() {
               </View>
             </View>
 
-            {/* Terms and conditions checkbox */}
             <TouchableOpacity
               style={styles.termsContainer}
               onPress={() => setAgreeTerms(!agreeTerms)}
@@ -290,7 +279,6 @@ export default function SignUpScreen() {
               </Text>
             </TouchableOpacity>
 
-            {/* Submit Button */}
             <TouchableOpacity
               style={styles.button}
               onPress={handleSignUp}
@@ -300,7 +288,6 @@ export default function SignUpScreen() {
               <Ionicons name="arrow-forward" size={20} color="#ffffff" />
             </TouchableOpacity>
 
-            {/* Footer / Login Link */}
             <View style={styles.footerContainer}>
               <Text style={styles.footerText}>Already have an account? </Text>
               <TouchableOpacity

@@ -27,11 +27,9 @@ export default function EmailVerifyScreen() {
     <SafeAreaView style={styles.container} edges={["top", "left", "right", "bottom"]}>
       <StatusBar style="light" />
 
-      {/* Ambient background glow */}
       <View style={styles.ambientGlowTop} />
       <View style={styles.ambientGlowBottom} />
 
-      {/* Top Bar */}
       <View style={styles.navBar}>
         <TouchableOpacity
           style={styles.backButton}
