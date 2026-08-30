@@ -1,4 +1,3 @@
-import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
@@ -14,7 +13,7 @@ import {
 const PEXELS_API_KEY =
   "mNsEQaXZbUlhJH6vAoHlAY10isgk0CUlSQkyfeBCPssuu9XF7LJyqXBZ";
 
-export default function HomeComponent() {
+export default function HomeTab() {
   const [wallpapers, setWallpapers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
