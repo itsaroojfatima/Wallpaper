@@ -27,11 +27,14 @@ export default function LoginScreen() {
 
   const handleLogin = () => {
     console.log("Login pressed:", email, password);
-    router.replace("/(tabs)/home");
+    router.replace("/home");
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "left", "right", "bottom"]}>
+    <SafeAreaView
+      style={styles.container}
+      edges={["top", "left", "right", "bottom"]}
+    >
       <StatusBar style="light" />
 
       {/* Ambient background glow effects */}
