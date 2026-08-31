@@ -1,11 +1,11 @@
 import AmbientGlow from "@/components/common/AmbientGlow";
-import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import {
   Animated,
   Easing,
+  Image,
   StyleSheet,
   Text,
   View,
@@ -108,22 +108,12 @@ export default function SplashScreen() {
             },
           ]}
         >
-          <View style={styles.outerRing}>
-            <View style={styles.logoBadge}>
-              <Ionicons
-                name="sparkles"
-                size={24}
-                color="#b8867a"
-                style={styles.sparkleTop}
-              />
-              <Text style={styles.logoLetter}>W</Text>
-              <Ionicons
-                name="images-outline"
-                size={18}
-                color="#b8867a"
-                style={styles.sparkleBottom}
-              />
-            </View>
+          <View style={styles.outerGlow}>
+            <Image
+              source={require("@/assets/images/icon.png")}
+              style={styles.logoImage}
+              resizeMode="contain"
+            />
           </View>
         </Animated.View>
 
@@ -173,49 +163,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  outerRing: {
-    width: 124,
-    height: 124,
+  outerGlow: {
+    width: 140,
+    height: 140,
     borderRadius: 36,
-    padding: 3,
-    backgroundColor: "rgba(184, 134, 122, 0.25)",
-    borderWidth: 1,
-    borderColor: "rgba(184, 134, 122, 0.4)",
     shadowColor: "#b8867a",
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.35,
-    shadowRadius: 20,
-    elevation: 10,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.45,
+    shadowRadius: 24,
+    elevation: 12,
     justifyContent: "center",
     alignItems: "center",
   },
-  logoBadge: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "#171720",
-    borderRadius: 33,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    overflow: "hidden",
-  },
-  sparkleTop: {
-    position: "absolute",
-    top: 10,
-    right: 12,
-    opacity: 0.8,
-  },
-  sparkleBottom: {
-    position: "absolute",
-    bottom: 12,
-    left: 12,
-    opacity: 0.6,
-  },
-  logoLetter: {
-    fontSize: 54,
-    fontWeight: "900",
-    color: "#b8867a",
-    letterSpacing: -1,
+  logoImage: {
+    width: 130,
+    height: 130,
+    borderRadius: 32,
   },
   textContainer: {
     alignItems: "center",
