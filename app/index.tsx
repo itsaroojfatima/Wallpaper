@@ -1,20 +1,25 @@
+import AmbientGlow from "@/components/common/AmbientGlow";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useRef } from "react";
-import { Animated, Dimensions, Easing, StyleSheet, Text, View } from "react-native";
-
-const { width } = Dimensions.get("window");
+import { useEffect, useState } from "react";
+import {
+  Animated,
+  Easing,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function SplashScreen() {
   const router = useRouter();
 
-  const logoScale = useRef(new Animated.Value(0.8)).current;
-  const logoOpacity = useRef(new Animated.Value(0)).current;
-  const textOpacity = useRef(new Animated.Value(0)).current;
-  const textTranslateY = useRef(new Animated.Value(20)).current;
-  const progressAnim = useRef(new Animated.Value(0)).current;
-  const glowAnim = useRef(new Animated.Value(0.4)).current;
+  const [logoScale] = useState(() => new Animated.Value(0.8));
+  const [logoOpacity] = useState(() => new Animated.Value(0));
+  const [textOpacity] = useState(() => new Animated.Value(0));
+  const [textTranslateY] = useState(() => new Animated.Value(20));
+  const [progressAnim] = useState(() => new Animated.Value(0));
+  const [glowAnim] = useState(() => new Animated.Value(0.4));
 
   useEffect(() => {
     Animated.parallel([
@@ -64,7 +69,7 @@ export default function SplashScreen() {
           easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
         }),
-      ])
+      ]),
     ).start();
 
     const timer = setTimeout(() => {
@@ -72,7 +77,15 @@ export default function SplashScreen() {
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [
+    logoScale,
+    logoOpacity,
+    textOpacity,
+    textTranslateY,
+    progressAnim,
+    glowAnim,
+    router,
+  ]);
 
   const progressWidth = progressAnim.interpolate({
     inputRange: [0, 1],
@@ -83,8 +96,7 @@ export default function SplashScreen() {
     <View style={styles.container}>
       <StatusBar style="light" />
 
-      <Animated.View style={[styles.ambientGlowTop, { opacity: glowAnim }]} />
-      <View style={styles.ambientGlowBottom} />
+      <AmbientGlow animatedTopStyle={{ opacity: glowAnim }} />
 
       <View style={styles.centerContent}>
         <Animated.View
@@ -98,9 +110,19 @@ export default function SplashScreen() {
         >
           <View style={styles.outerRing}>
             <View style={styles.logoBadge}>
-              <Ionicons name="sparkles" size={24} color="#b8867a" style={styles.sparkleTop} />
+              <Ionicons
+                name="sparkles"
+                size={24}
+                color="#b8867a"
+                style={styles.sparkleTop}
+              />
               <Text style={styles.logoLetter}>W</Text>
-              <Ionicons name="images-outline" size={18} color="#b8867a" style={styles.sparkleBottom} />
+              <Ionicons
+                name="images-outline"
+                size={18}
+                color="#b8867a"
+                style={styles.sparkleBottom}
+              />
             </View>
           </View>
         </Animated.View>
@@ -140,24 +162,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 50,
-  },
-  ambientGlowTop: {
-    position: "absolute",
-    top: -width * 0.25,
-    right: -width * 0.2,
-    width: width * 0.85,
-    height: width * 0.85,
-    borderRadius: (width * 0.85) / 2,
-    backgroundColor: "rgba(184, 134, 122, 0.22)",
-  },
-  ambientGlowBottom: {
-    position: "absolute",
-    bottom: -width * 0.3,
-    left: -width * 0.2,
-    width: width * 0.9,
-    height: width * 0.9,
-    borderRadius: (width * 0.9) / 2,
-    backgroundColor: "rgba(45, 27, 78, 0.3)",
   },
   centerContent: {
     flex: 1,

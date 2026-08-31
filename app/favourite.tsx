@@ -8,7 +8,6 @@ export default function FavoritesScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Top Dark Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -20,7 +19,6 @@ export default function FavoritesScreen() {
         <Text style={styles.headerTitle}>Favourites</Text>
       </View>
 
-      {/* Main White Content Area */}
       <View style={styles.contentContainer}>
         <Ionicons
           name="heart"
@@ -38,7 +36,6 @@ export default function FavoritesScreen() {
         <TouchableOpacity
           style={styles.exploreButton}
           activeOpacity={0.8}
-          // Ise Home screen par wapas bhejne ke liye set kiya hai
           onPress={() => router.push("/")}
         >
           <Text style={styles.exploreButtonText}>EXPLORE</Text>
@@ -51,7 +48,7 @@ export default function FavoritesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0a0a12", // Tumhari app ka dark background theme
+    backgroundColor: "#0a0a12",
   },
   header: {
     flexDirection: "row",
@@ -69,7 +66,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    backgroundColor: "#ffffff", // White body jesa screenshot mein hai
+    backgroundColor: "#ffffff",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     alignItems: "center",
@@ -93,7 +90,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   exploreButton: {
-    backgroundColor: "#e5e7eb", // Light gray background
+    backgroundColor: "#e5e7eb",
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 25,
