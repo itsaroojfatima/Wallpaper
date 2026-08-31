@@ -9,20 +9,23 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import {
   Alert,
-  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const [activeTab, setActiveTab] = useState<TabType>("home");
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView
+      style={styles.container}
+      edges={["top", "left", "right"]}
+    >
       <StatusBar style="light" />
 
       <View style={styles.header}>
@@ -165,7 +168,7 @@ export default function HomeScreen() {
         {activeTab === "new" && <NewFeed />}
         {activeTab === "trending" && <TrendingFeed />}
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -179,8 +182,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingTop: Platform.OS === "android" ? 75 : 85,
-    paddingBottom: 15,
+    paddingTop: 8,
+    paddingBottom: 12,
     backgroundColor: "#0a0a12",
     zIndex: 100,
     elevation: 100,
