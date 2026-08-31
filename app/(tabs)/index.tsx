@@ -15,17 +15,17 @@ import {
   Text,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
+  const insets = useSafeAreaInsets();
   const [activeTab, setActiveTab] = useState<TabType>("home");
   const router = useRouter();
 
+  const topInset = Math.max(insets.top - 10, 36);
+
   return (
-    <SafeAreaView
-      style={styles.container}
-      edges={["top", "left", "right"]}
-    >
+    <View style={[styles.container, { paddingTop: topInset }]}>
       <StatusBar style="light" />
 
       <View style={styles.header}>
@@ -168,7 +168,7 @@ export default function HomeScreen() {
         {activeTab === "new" && <NewFeed />}
         {activeTab === "trending" && <TrendingFeed />}
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingTop: 8,
-    paddingBottom: 12,
+    paddingTop: 2,
+    paddingBottom: 8,
     backgroundColor: "#0a0a12",
     zIndex: 100,
     elevation: 100,
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   },
   tabsWrapper: {
     backgroundColor: "#0a0a12",
-    paddingBottom: 12,
+    paddingBottom: 10,
     zIndex: 100,
   },
   tabsScrollContent: {
