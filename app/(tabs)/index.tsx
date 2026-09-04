@@ -7,14 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import {
-  Alert,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
@@ -37,16 +30,15 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.headerActions}>
+          {/* Settings Button Fixed */}
           <Pressable
             style={styles.iconBtn}
-            onPress={() => {
-              Alert.alert("Settings", "Settings button clicked!");
-              router.push("/");
-            }}
+            onPress={() => router.push("/setting")}
           >
             <Ionicons name="settings-outline" size={22} color="#ffffff" />
           </Pressable>
 
+          {/* Grid Button (Yeh theek hai, Categories tab open karta hai) */}
           <Pressable
             style={styles.iconBtn}
             onPress={() => setActiveTab("grid")}
@@ -54,12 +46,10 @@ export default function HomeScreen() {
             <Ionicons name="grid-outline" size={22} color="#ffffff" />
           </Pressable>
 
+          {/* Favorite Button Fixed */}
           <Pressable
             style={styles.iconBtn}
-            onPress={() => {
-              Alert.alert("Favorite", "Favorite button clicked!");
-              router.push("/");
-            }}
+            onPress={() => router.push("/favourite")}
           >
             <Ionicons name="heart-outline" size={23} color="#ffffff" />
           </Pressable>
