@@ -1,24 +1,27 @@
-import { Ionicons } from "@expo/vector-icons";
+import AmbientGlow from "@/components/common/AmbientGlow";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useRef } from "react";
-import { Animated, Dimensions, Easing, StyleSheet, Text, View } from "react-native";
-
-const { width } = Dimensions.get("window");
+import { useEffect, useState } from "react";
+import {
+  Animated,
+  Easing,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function SplashScreen() {
   const router = useRouter();
 
-  // Animation values
-  const logoScale = useRef(new Animated.Value(0.8)).current;
-  const logoOpacity = useRef(new Animated.Value(0)).current;
-  const textOpacity = useRef(new Animated.Value(0)).current;
-  const textTranslateY = useRef(new Animated.Value(20)).current;
-  const progressAnim = useRef(new Animated.Value(0)).current;
-  const glowAnim = useRef(new Animated.Value(0.4)).current;
+  const [logoScale] = useState(() => new Animated.Value(0.8));
+  const [logoOpacity] = useState(() => new Animated.Value(0));
+  const [textOpacity] = useState(() => new Animated.Value(0));
+  const [textTranslateY] = useState(() => new Animated.Value(20));
+  const [progressAnim] = useState(() => new Animated.Value(0));
+  const [glowAnim] = useState(() => new Animated.Value(0.4));
 
   useEffect(() => {
-    // 1. Entrance animation sequence
     Animated.parallel([
       Animated.spring(logoScale, {
         toValue: 1,
@@ -48,11 +51,10 @@ export default function SplashScreen() {
         toValue: 1,
         duration: 2600,
         easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-        useNativeDriver: false, // width animation
+        useNativeDriver: false,
       }),
     ]).start();
 
-    // 2. Continuous subtle glow pulse
     Animated.loop(
       Animated.sequence([
         Animated.timing(glowAnim, {
@@ -67,16 +69,23 @@ export default function SplashScreen() {
           easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
         }),
-      ])
+      ]),
     ).start();
 
-    // 3. Navigation to Login
     const timer = setTimeout(() => {
       router.replace("/login");
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [
+    logoScale,
+    logoOpacity,
+    textOpacity,
+    textTranslateY,
+    progressAnim,
+    glowAnim,
+    router,
+  ]);
 
   const progressWidth = progressAnim.interpolate({
     inputRange: [0, 1],
@@ -87,12 +96,9 @@ export default function SplashScreen() {
     <View style={styles.container}>
       <StatusBar style="light" />
 
-      {/* Ambient background glow orbs */}
-      <Animated.View style={[styles.ambientGlowTop, { opacity: glowAnim }]} />
-      <View style={styles.ambientGlowBottom} />
+      <AmbientGlow animatedTopStyle={{ opacity: glowAnim }} />
 
       <View style={styles.centerContent}>
-        {/* Animated Brand Logo Icon */}
         <Animated.View
           style={[
             styles.logoWrapper,
@@ -102,16 +108,15 @@ export default function SplashScreen() {
             },
           ]}
         >
-          <View style={styles.outerRing}>
-            <View style={styles.logoBadge}>
-              <Ionicons name="sparkles" size={24} color="#b8867a" style={styles.sparkleTop} />
-              <Text style={styles.logoLetter}>W</Text>
-              <Ionicons name="images-outline" size={18} color="#b8867a" style={styles.sparkleBottom} />
-            </View>
+          <View style={styles.outerGlow}>
+            <Image
+              source={require("@/assets/images/icon.png")}
+              style={styles.logoImage}
+              resizeMode="contain"
+            />
           </View>
         </Animated.View>
 
-        {/* Animated Brand Text */}
         <Animated.View
           style={[
             styles.textContainer,
@@ -128,7 +133,6 @@ export default function SplashScreen() {
         </Animated.View>
       </View>
 
-      {/* Bottom Loading Progress & Footer */}
       <View style={styles.footerContainer}>
         <View style={styles.progressBarTrack}>
           <Animated.View
@@ -149,24 +153,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 50,
   },
-  ambientGlowTop: {
-    position: "absolute",
-    top: -width * 0.25,
-    right: -width * 0.2,
-    width: width * 0.85,
-    height: width * 0.85,
-    borderRadius: (width * 0.85) / 2,
-    backgroundColor: "rgba(184, 134, 122, 0.22)",
-  },
-  ambientGlowBottom: {
-    position: "absolute",
-    bottom: -width * 0.3,
-    left: -width * 0.2,
-    width: width * 0.9,
-    height: width * 0.9,
-    borderRadius: (width * 0.9) / 2,
-    backgroundColor: "rgba(45, 27, 78, 0.3)",
-  },
   centerContent: {
     flex: 1,
     justifyContent: "center",
@@ -177,49 +163,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  outerRing: {
-    width: 124,
-    height: 124,
+  outerGlow: {
+    width: 140,
+    height: 140,
     borderRadius: 36,
-    padding: 3,
-    backgroundColor: "rgba(184, 134, 122, 0.25)",
-    borderWidth: 1,
-    borderColor: "rgba(184, 134, 122, 0.4)",
     shadowColor: "#b8867a",
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.35,
-    shadowRadius: 20,
-    elevation: 10,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.45,
+    shadowRadius: 24,
+    elevation: 12,
     justifyContent: "center",
     alignItems: "center",
   },
-  logoBadge: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "#171720",
-    borderRadius: 33,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    overflow: "hidden",
-  },
-  sparkleTop: {
-    position: "absolute",
-    top: 10,
-    right: 12,
-    opacity: 0.8,
-  },
-  sparkleBottom: {
-    position: "absolute",
-    bottom: 12,
-    left: 12,
-    opacity: 0.6,
-  },
-  logoLetter: {
-    fontSize: 54,
-    fontWeight: "900",
-    color: "#b8867a",
-    letterSpacing: -1,
+  logoImage: {
+    width: 130,
+    height: 130,
+    borderRadius: 32,
   },
   textContainer: {
     alignItems: "center",

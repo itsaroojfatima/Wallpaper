@@ -2,6 +2,7 @@ import AuthButton from "@/components/auth/AuthButton";
 import AuthInput from "@/components/auth/AuthInput";
 import AmbientGlow from "@/components/common/AmbientGlow";
 import AuthHeader from "@/components/common/AuthHeader";
+import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
@@ -16,14 +17,13 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function LoginScreen() {
+export default function ForgotPasswordScreen() {
   const router = useRouter();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    console.log("Login pressed:", email, password);
-    router.replace("/(tabs)/home");
+  const handleSubmit = () => {
+    console.log("Password reset email sent to:", email);
+    router.push("/otp");
   };
 
   return (
@@ -35,6 +35,8 @@ export default function LoginScreen() {
 
       <AmbientGlow />
 
+      <AuthHeader />
+
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.keyboardView}
@@ -45,54 +47,37 @@ export default function LoginScreen() {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.innerContainer}>
-            <AuthHeader showBackButton={false} />
-
-            <View style={styles.titleSection}>
-              <Text style={styles.welcomeText}>Welcome Back</Text>
-              <Text style={styles.subtitleText}>
-                Sign in to access your curated 4K wallpapers
-              </Text>
+            <View style={styles.iconCircle}>
+              <Ionicons name="key-outline" size={32} color="#b8867a" />
             </View>
 
-            <View style={styles.formContainer}>
+            <Text style={styles.title}>Forgot Password</Text>
+            <Text style={styles.subtitle}>
+              No worries! Enter your registered email address and we'll send you
+              an OTP to reset your password.
+            </Text>
+
+            <View style={styles.inputContainer}>
               <AuthInput
                 label="Email Address"
                 iconName="mail-outline"
-                placeholder="Enter your email"
+                placeholder="Enter your email address"
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
               />
-
-              <AuthInput
-                label="Password"
-                iconName="lock-closed-outline"
-                placeholder="Enter your password"
-                isPassword
-                value={password}
-                onChangeText={setPassword}
-              />
-
-              <TouchableOpacity
-                style={styles.forgotPasswordContainer}
-                onPress={() => router.push("/forget-password")}
-                activeOpacity={0.7}
-              >
-                <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-              </TouchableOpacity>
-
-              <AuthButton title="Sign In" onPress={handleLogin} />
             </View>
 
-            <View style={styles.footerContainer}>
-              <Text style={styles.footerText}>Don't have an account? </Text>
-              <TouchableOpacity
-                onPress={() => router.push("/sign-up")}
-                activeOpacity={0.7}
-              >
-                <Text style={styles.signUpText}>Sign Up</Text>
-              </TouchableOpacity>
-            </View>
+            <AuthButton title="Send Reset Code" onPress={handleSubmit} />
+
+            <TouchableOpacity
+              style={styles.backToLogin}
+              onPress={() => router.push("/login")}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="arrow-back" size={16} color="#b8867a" />
+              <Text style={styles.backToLoginText}>Back to Sign In</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -119,44 +104,41 @@ const styles = StyleSheet.create({
     maxWidth: 420,
     alignSelf: "center",
   },
-  titleSection: {
-    marginBottom: 28,
+  iconCircle: {
+    width: 68,
+    height: 68,
+    borderRadius: 22,
+    backgroundColor: "rgba(184, 134, 122, 0.14)",
+    borderWidth: 1,
+    borderColor: "rgba(184, 134, 122, 0.3)",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 24,
   },
-  welcomeText: {
-    fontSize: 32,
+  title: {
+    fontSize: 30,
     fontWeight: "800",
     color: "#ffffff",
     letterSpacing: 0.5,
     marginBottom: 8,
   },
-  subtitleText: {
+  subtitle: {
     fontSize: 14,
     color: "#9ca3af",
-    lineHeight: 20,
+    lineHeight: 22,
+    marginBottom: 28,
   },
-  formContainer: {
-    gap: 18,
+  inputContainer: {
+    marginBottom: 24,
   },
-  forgotPasswordContainer: {
-    alignSelf: "flex-end",
-    marginTop: -4,
-  },
-  forgotPasswordText: {
-    color: "#b8867a",
-    fontSize: 13,
-    fontWeight: "600",
-  },
-  footerContainer: {
+  backToLogin: {
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
-    marginTop: 32,
+    justifyContent: "center",
+    gap: 8,
+    marginTop: 28,
   },
-  footerText: {
-    color: "#9ca3af",
-    fontSize: 14,
-  },
-  signUpText: {
+  backToLoginText: {
     color: "#b8867a",
     fontSize: 14,
     fontWeight: "700",
