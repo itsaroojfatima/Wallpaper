@@ -1,6 +1,6 @@
 import { File, Paths } from "expo-file-system";
 import * as MediaLibrary from "expo-media-library/legacy";
-import { Alert } from "react-native";
+import { Alert, NativeModules, Platform } from "react-native";
 
 export type WallpaperTarget = "home" | "lock" | "both";
 
@@ -59,7 +59,50 @@ export const applyWallpaperToTarget = async (
   imageUrl: string,
   target: WallpaperTarget,
 ): Promise<WallpaperOperationResult> => {
-  Alert.alert("Success", `Wallpaper set to ${target} screen successfully!`);
-  return { success: true };
+  try {
+    if (!imageUrl) {
+      return { success: false, error: "Image URL is missing" };
+    }
+
+    if (Platform.OS === "android") {
+      const { WallpaperSetterModule } = NativeModules;
+      if (WallpaperSetterModule && WallpaperSetterModule.setWallpaper) {
+        await WallpaperSetterModule.setWallpaper(imageUrl, target);
+        Alert.alert(
+          "Wallpaper Set 🎉",
+          `Wallpaper set to ${target} screen successfully!`,
+        );
+        return { success: true };
+      } else {
+        // Fallback: download to gallery
+        const dlResult = await downloadAndSaveWallpaper(imageUrl);
+        if (dlResult.success) {
+          Alert.alert(
+            "Wallpaper Saved",
+            "Please apply this wallpaper from your gallery settings.",
+          );
+          return { success: true };
+        }
+        return dlResult;
+      }
+    } else {
+      // iOS doesn't allow 3rd party apps to directly change device wallpapers
+      const dlResult = await downloadAndSaveWallpaper(imageUrl);
+      if (dlResult.success) {
+        Alert.alert(
+          "Saved to Photos",
+          "On iOS, wallpapers cannot be set automatically. The image was saved to your Photos app so you can set it as wallpaper.",
+        );
+        return { success: true };
+      }
+      return dlResult;
+    }
+  } catch (error: any) {
+    return {
+      success: false,
+      error: error?.message || "Failed to set wallpaper",
+    };
+  }
 };
+
 
